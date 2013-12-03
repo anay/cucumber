@@ -70,8 +70,10 @@ module Cucumber
 
       #used for capturing duration
       def after_step(step)
-        step_finish = (Time.now - @step_time)
+        @step_end_time = Time.now
+        step_finish = (@step_end_time - @step_time)
         @gf.append_duration(step_finish)
+        @gf.record_timestamps(@step_time, @step_end_time)
       end
 
       def after_feature(feature)
